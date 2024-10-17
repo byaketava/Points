@@ -5,6 +5,7 @@ firebaseAuth = "23.0.0"
 firebaseBom = "33.4.0"
 firebaseFirestoreKtx = "25.1.0"
 firebaseFirestoreKtxVersion = "24.4.0"
+googleMaterial = "1.7.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -15,11 +16,14 @@ activityCompose = "1.9.2"
 composeBom = "2024.09.03"
 firebaseDatabase = "21.0.0"
 material = "1.12.0"
+navigationUiKtx = "2.8.3"
 playServicesMaps = "19.0.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigationUiKtx" }
+androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigationUiKtx" }
 firebase-auth = { module = "com.google.firebase:firebase-auth", version.ref = "firebaseAuth" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
@@ -39,6 +43,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
+material-v170 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 
 [plugins]

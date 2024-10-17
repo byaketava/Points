@@ -51,13 +51,15 @@ android {
 }
 
 dependencies {
+    implementation (libs.androidx.navigation.fragment.ktx) // или последняя версия
+    implementation (libs.androidx.navigation.ui.ktx)// или последняя версия
     implementation(libs.firebase.firestore.ktx)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore.ktx.v2440)
     implementation(libs.material)
     implementation(libs.androidx.appcompat)
     implementation(libs.firebase.auth) // Для авторизации
-    // Для карт
+    implementation(libs.play.services.maps) // Для карт
     implementation(libs.firebase.database) // Для базы данных
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
