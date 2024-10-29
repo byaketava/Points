@@ -1,0 +1,42 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/startPointField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Начальная точка" />
+
+    <EditText
+        android:id="@+id/endPointField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Конечная точка" />
+
+    <EditText
+        android:id="@+id/routeNoteField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Заметка к пути" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сохранить путь" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Не сохранять путь" />
+
+    <com.mapbox.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+</LinearLayout>

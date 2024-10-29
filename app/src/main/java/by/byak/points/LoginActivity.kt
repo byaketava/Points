@@ -42,8 +42,8 @@ class LoginActivity : AppCompatActivity() {
                             auth.signInWithEmailAndPassword(email, password)
                                 .addOnCompleteListener(this) { task ->
                                     if (task.isSuccessful) {
-                                        val intent =
-                                            Intent(this@LoginActivity, ProfileActivity::class.java)
+                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                        intent.putExtra("openProfile", true)
                                         startActivity(intent)
                                         finish()
                                     } else {

@@ -51,8 +51,10 @@ android {
 }
 
 dependencies {
-    implementation (libs.androidx.navigation.fragment.ktx) // или последняя версия
-    implementation (libs.androidx.navigation.ui.ktx)// или последняя версия
+    implementation("com.mapbox.maps:android:11.7.1")
+    implementation (libs.androidx.viewpager2)
+    implementation (libs.androidx.navigation.fragment.ktx)
+    implementation (libs.androidx.navigation.ui.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore.ktx.v2440)
