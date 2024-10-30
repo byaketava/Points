@@ -5,18 +5,24 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.GestureDetector
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
     private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var viewPager: ViewPager2
+
+    private lateinit var auth: FirebaseAuth
     private lateinit var animatedIcon: ImageView
+
+    private lateinit var gestureDetector: GestureDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,39 +36,47 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.visibility = View.GONE
 
         // Проверяем, аутентифицирован ли пользователь
-        if (auth.currentUser != null) {
-            // Если пользователь аутентифицирован, сразу загружаем ProfileFragment
-            loadFragment(ProfileFragment())
-            animatedIcon.visibility = View.GONE // Скрываем иконку, если она есть
-        } else {
+        if (auth.currentUser == null) {
             // Если не аутентифицирован, выполняем анимацию
             performAnimation()
+
+        } else {
+            // Если пользователь аутентифицирован, сразу загружаем ProfileFragment
+            initializeViewPager()
         }
+    }
+
+
+    private fun initializeViewPager() {
+        viewPager = findViewById(R.id.viewPager)
+        viewPager.adapter = ViewPagerAdapter(this)
+        bottomNavigationView.visibility = View.VISIBLE
+        animatedIcon.visibility = View.GONE
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                bottomNavigationView.menu.getItem(position).isChecked = true
+            }
+        })
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_profile -> {
-                    loadFragment(ProfileFragment())
-                    true
-                }
-                R.id.navigation_create_route -> {
-                    loadFragment(CreateRouteFragment())
-                    true
-                }
-                R.id.navigation_routes -> {
-                    loadFragment(RoutesFragment())
-                    true
-                }
-                else -> false
+                R.id.navigation_profile -> viewPager.currentItem = 0
+                R.id.navigation_create_route -> viewPager.currentItem = 1
+                R.id.navigation_routes -> viewPager.currentItem = 2
             }
+            true
         }
     }
+
 
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment)
             .commit()
-        bottomNavigationView.visibility = View.VISIBLE // Показываем навигационное меню при загрузке фрагмента
+        bottomNavigationView.visibility =
+            View.VISIBLE // Показываем навигационное меню при загрузке фрагмента
     }
 
     private fun performAnimation() {

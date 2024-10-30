@@ -1,42 +1,102 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/startPointField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Начальная точка" />
-
-    <EditText
-        android:id="@+id/endPointField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Конечная точка" />
-
-    <EditText
-        android:id="@+id/routeNoteField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Заметка к пути" />
-
-    <Button
-        android:id="@+id/saveButton"
+    <TextView
+        android:id="@+id/pageTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Сохранить путь" />
+        android:layout_gravity="center_horizontal"
+        android:text="Создание маршрута"
+        android:layout_marginBottom="16dp"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/purple" />
 
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
+    <!-- Поля ввода для начальной и конечной точек -->
+    <EditText
+        android:id="@+id/startPoint"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_edittext"
+        android:drawableLeft="@drawable/round_place_24_map"
+        android:drawablePadding="8dp"
+        android:hint="Начальная точка"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textColorHighlight="@color/cardview_dark_background" />
+
+    <EditText
+        android:id="@+id/endPoint"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_edittext"
+        android:drawableLeft="@drawable/round_place_24_map"
+        android:drawablePadding="8dp"
+        android:hint="Конечная точка"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textColorHighlight="@color/cardview_dark_background" />
+
+    <!-- Поле для заметки -->
+    <EditText
+        android:id="@+id/noteField"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/custom_edittext"
+        android:drawableLeft="@drawable/round_notes_24"
+        android:drawablePadding="8dp"
+        android:hint="Заметка о маршруте"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textColorHighlight="@color/cardview_dark_background" />
+
+    <!-- Кнопки Сохранить и Отмена -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Не сохранять путь" />
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext"
+            android:backgroundTint="@color/purple"
+            android:text="Сохранить"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/discardButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/custom_edittext"
+            android:backgroundTint="@color/purple"
+            android:text="Не сохранять"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
 
     <com.mapbox.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_editmap"
+        android:clipToOutline="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="66dp"
+        android:layout_weight="1" />
 </LinearLayout>

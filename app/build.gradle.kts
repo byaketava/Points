@@ -52,7 +52,7 @@ android {
 
 dependencies {
     implementation("com.mapbox.maps:android:11.7.1")
-    implementation (libs.androidx.viewpager2)
+    implementation(libs.androidx.viewpager2)
     implementation (libs.androidx.navigation.fragment.ktx)
     implementation (libs.androidx.navigation.ui.ktx)
     implementation(libs.firebase.firestore.ktx)
@@ -61,7 +61,6 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.appcompat)
     implementation(libs.firebase.auth) // Для авторизации
-    implementation(libs.play.services.maps) // Для карт
     implementation(libs.firebase.database) // Для базы данных
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
