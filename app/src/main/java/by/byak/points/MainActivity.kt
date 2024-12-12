@@ -5,7 +5,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.view.GestureDetector
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
@@ -22,8 +21,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var animatedIcon: ImageView
 
-    private lateinit var gestureDetector: GestureDetector
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,20 +29,15 @@ class MainActivity : AppCompatActivity() {
         animatedIcon = findViewById(R.id.animatedIcon)
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
-        // Скрываем нижнее меню навигации в начале
         bottomNavigationView.visibility = View.GONE
 
-        // Проверяем, аутентифицирован ли пользователь
         if (auth.currentUser == null) {
-            // Если не аутентифицирован, выполняем анимацию
             performAnimation()
 
         } else {
-            // Если пользователь аутентифицирован, сразу загружаем ProfileFragment
             initializeViewPager()
         }
     }
-
 
     private fun initializeViewPager() {
         viewPager = findViewById(R.id.viewPager)
@@ -72,18 +64,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, fragment)
-            .commit()
-        bottomNavigationView.visibility =
-            View.VISIBLE // Показываем навигационное меню при загрузке фрагмента
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+        bottomNavigationView.visibility = View.VISIBLE
     }
 
     private fun performAnimation() {
-        // Скрываем нижнее меню навигации во время анимации
         bottomNavigationView.visibility = View.GONE
-
-        animatedIcon.visibility = View.VISIBLE // Показываем иконку анимации
+        animatedIcon.visibility = View.VISIBLE
 
         // Анимация падения сверху вниз
         val screenHeight = resources.displayMetrics.heightPixels
@@ -111,15 +98,13 @@ class MainActivity : AppCompatActivity() {
                 animatorSet.play(scaleUpX).with(scaleUpY).before(fadeOut)
                 animatorSet.addListener(object : Animator.AnimatorListener {
                     override fun onAnimationEnd(animation: Animator) {
-                        // После завершения анимации проверяем, есть ли текущий пользователь
                         if (auth.currentUser == null) {
                             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-                            finish() // Закрываем MainActivity
+                            finish()
                         } else {
-                            // Если пользователь уже авторизован, загружаем ProfileFragment
                             loadFragment(ProfileFragment())
                         }
-                        animatedIcon.visibility = View.GONE // Скрываем иконку после анимации
+                        animatedIcon.visibility = View.GONE
                     }
 
                     override fun onAnimationStart(animation: Animator) {}

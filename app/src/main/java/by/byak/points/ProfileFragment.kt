@@ -33,9 +33,6 @@ class ProfileFragment : Fragment() {
         userEmailText = view.findViewById(R.id.userEmailText)
         logoutButton = view.findViewById(R.id.logoutButton)
 
-        //bottomNavigationView.visibility = View.VISIBLE
-
-        // Получаем текущего пользователя
         val userId = auth.currentUser?.uid
         if (userId != null) {
             firestore.collection("users").document(userId).get()

@@ -19,6 +19,11 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+            }
+        }
     }
 
     buildTypes {
@@ -48,20 +53,27 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    externalNativeBuild {
+        cmake {
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
+        }
+    }
 }
 
 dependencies {
     implementation("com.mapbox.maps:android:11.7.1")
+    implementation(libs.mapbox.search.android.native)
+    implementation(libs.mapbox.search.android.ui)
     implementation(libs.androidx.viewpager2)
-    implementation (libs.androidx.navigation.fragment.ktx)
-    implementation (libs.androidx.navigation.ui.ktx)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.storage)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore.ktx.v2440)
     implementation(libs.material)
     implementation(libs.androidx.appcompat)
-    implementation(libs.firebase.auth) // Для авторизации
-    implementation(libs.firebase.database) // Для базы данных
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

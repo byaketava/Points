@@ -16,6 +16,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    val nativeLib = NativeLib()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,15 @@ class LoginActivity : AppCompatActivity() {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
 
+            if (nativeLib.isUserValid(username, password))
+                Toast.makeText(this, "Невалидный ввод", Toast.LENGTH_LONG)
+                    .show()
+            else {
+                Toast.makeText(this, "Данные введены корректно", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
             firestore.collection("users").whereEqualTo("username", username).get()
                 .addOnSuccessListener { documents ->
                     if (!documents.isEmpty) {

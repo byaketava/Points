@@ -4,6 +4,13 @@
     package="by.byak.points"
     tools:ignore="CoarseFineLocation">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission
+        android:name="android.permission.INTERNET"
+        tools:ignore="ManifestOrder" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -36,10 +43,9 @@
             android:name=".RegisterActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-    </application>
 
-    <uses-permission
-        android:name="android.permission.INTERNET"
-        tools:ignore="ManifestOrder" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <meta-data
+            android:name="MAPBOX_ACCESS_TOKEN"
+            android:resource="@string/mapbox_access_token" />
+    </application>
 </manifest>
